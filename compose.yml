@@ -1,0 +1,34 @@
+networks:
+  laravelskills-network:
+    driver: bridge
+    
+services:
+  web:
+    build: .
+    restart: on-failure
+    networks:
+      - laravelskills-network
+    ports: 
+      - 86:80
+    depends_on:
+      - db
+    volumes:
+      - ./app:/var/www
+  db:
+    image: postgres
+    restart: on-failure
+    networks:
+      - laravelskills-network
+    ports:
+      - 5486:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: laravelskills_pg_user
+      POSTGRES_PASSWORD: 2\7U&£pfJ^7`
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - 87:8080
