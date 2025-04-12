@@ -28,6 +28,9 @@ services:
       POSTGRES_USER: laravelskills_pg_user
       POSTGRES_PASSWORD: 2\7U&£pfJ^7`
   adminer:
+    build:
+      context: .
+      target: dev
     image: adminer
     restart: on-failure
     ports:
